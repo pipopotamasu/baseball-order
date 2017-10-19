@@ -1,13 +1,13 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Hello from '../components/app.vue'
-import Hello2 from '../components/app2.vue'
+import Members from '../components/members.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
   { path: '/hello1', component: Hello },
-  { path: '/hello2', component: Hello2 }
+  { path: '/members', component: Members }
 ]
 
 const router = new VueRouter({
