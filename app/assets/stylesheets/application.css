@@ -13,3 +13,4 @@
  *= require_tree .
  *= require_self
  */
+@import "element-ui/lib/theme-default/index.css";

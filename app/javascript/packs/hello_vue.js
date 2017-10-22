@@ -2,7 +2,9 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Hello from '../components/app.vue'
 import Members from '../components/members.vue'
+import Element from 'element-ui'
 
+Vue.use(Element)
 Vue.use(VueRouter)
 
 const routes = [
