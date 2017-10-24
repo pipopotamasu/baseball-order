@@ -1,7 +1,13 @@
 <h1>Baseball order system</h1>
 <div id="app">
-  <router-link to="/hello1">Go to Hello1</router-link>
-  <router-link to="/members">Go to Members</router-link>
+  <el-tabs v-model="activeName" type="card" @tab-click="swichTab">
+    <el-tab-pane label="Hello" name="hello"></el-tab-pane>
+    <el-tab-pane label="Members" name="members"></el-tab-pane>
+  </el-tabs>
+  <div id="rooter-wrapper" style="display: none;">
+    <router-link id="hello" to="/hello1">Go to Hello1</router-link>
+    <router-link id="members" to="/members">Go to Members</router-link>
+  </div>
   <router-view></router-view>
 </div>
-<%= javascript_pack_tag 'hello_vue' %>
+<%= javascript_pack_tag 'baseball_order' %>
