@@ -18,6 +18,7 @@
                 </el-table-column>
               </el-table-column>
             </el-table>
+          </draggable>
           </div>
 
           <div class="members inline-box">
@@ -36,6 +37,7 @@
 
 <script>
 import Vue from 'vue';
+import Draggable from 'vuedraggable'
 import axios from 'axios'
 
 // set csrf token by getting that from dom.
@@ -51,24 +53,29 @@ export default {
       games: [],
       members: [],
       value: '',
-      tableData: [{
-            batting_order: 1,
-            position: 1,
-            name: 'Tom'
-          }, {
-            batting_order: 2,
-            position: 2,
-            name: 'Tom'
-          }, {
-            batting_order: 3,
-            position: 3,
-            name: 'Tom'
-          }, {
-            batting_order: 4,
-            position: 4,
-            name: 'Tom'
-          }]
+      tableData: [{ batting_order: 1, position: 6, name: 'Murakami' }
+          // {
+          //   batting_order: 1,
+          //   position: 1,
+          //   name: 'Tom'
+          // }, {
+          //   batting_order: 2,
+          //   position: 2,
+          //   name: 'Tom'
+          // }, {
+          //   batting_order: 3,
+          //   position: 3,
+          //   name: 'Tom'
+          // }, {
+          //   batting_order: 4,
+          //   position: 4,
+          //   name: 'Tom'
+          // }
+        ]
     }
+  },
+  components: {
+    Draggable
   },
   created: function() {
     this.fetchHoge();
