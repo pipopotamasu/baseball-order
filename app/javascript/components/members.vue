@@ -1,19 +1,19 @@
 <template>
   <div id="members">
     <div>
-      <input v-model="input" type="text" size="20"/>
-      <button @click="addMember">Add</button>
-      <button @click="saveMember">Save</button>
+      <el-input placeholder="Please input" v-model="input" type="text" size="20" style="width: auto;"></el-input>
+      <el-button @click="addMember">Add</el-button>
+      <el-button type="info" @click="saveMember">Save</el-button>
     </div>
-    <div>
-      <span>{{ members.length }} members</span>
-      <ul>
-        <li v-for="member in members">
-          {{ member.name }}
-          <span @click="deleteMember(member.order)" class="delete">[×]</span>
-        </li>
-      </ul>
-    </div>
+    <el-card class="box-card">
+      <div slot="header" class="clearfix">
+        <span style="line-height: 36px;">{{ members.length }} Members</span>
+      </div>
+      <div v-for="member in members" class="text item">
+        {{ member.name }}
+        <span @click="deleteMember(member.order)" class="delete">[×]</span>
+      </div>
+    </el-card>
   </div>
 </template>
 
@@ -50,9 +50,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-li {
-  cursor: pointer;
-}
-</style>
