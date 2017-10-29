@@ -19,7 +19,7 @@
       title="Are you sure to delete below member?"
       :visible.sync="dialogVisible"
       width="30%">
-      <div class="delete-target">{{ members[deleteTargetOrder].name }}</div>
+      <div class="delete-target">{{ deleteTargetOrderName }}</div>
       <span slot="footer" class="dialog-footer">
         <el-button @click="cancelDelete">Cancel</el-button>
         <el-button type="primary" @click="deleteMember">Delete</el-button>
@@ -30,6 +30,13 @@
 
 <script>
 import Vue from 'vue';
+import axios from 'axios'
+// set csrf token by getting that from dom.
+if (document.getElementsByName('csrf-token')[0]) {
+  let token = document.getElementsByName('csrf-token')[0].getAttribute('content')
+  axios.defaults.headers.common['X-CSRF-Token'] = token
+  axios.defaults.headers.common['Accept'] = 'application/json'
+}
 
 export default {
   data: function () {
@@ -37,13 +44,30 @@ export default {
       input: '',
       dialogVisible: false,
       deleteTargetOrder: 0,
-      members: [
-        { id: 1, order: 0, name: 'Murakami' },
-        { id: 2, order: 1, name: 'Inoue' }
-      ]
+      members: []
     }
   },
+  computed: {
+    deleteTargetOrderName: function () {
+      if(this.dialogVisible){
+        return this.members[this.deleteTargetOrder].name;
+      }else{
+        return '';
+      }
+    }
+  },
+  created: function() {
+    this.fetchMembers();
+  },
   methods: {
+    fetchMembers: function() {
+      let self = this;
+      axios.get('/members/all').then((response) => {
+        self.members = response.data
+      }).catch((e) => {
+        // console.log(e);
+      });
+    },
     addMember: function() {
       if(this.input == '') return false;
       Vue.set(this.members, this.members.length, { id: this.members.length + 1, order: this.members.length, name: this.input });
