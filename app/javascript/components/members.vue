@@ -1,19 +1,31 @@
 <template>
   <div id="members">
-    <div>
-      <el-input placeholder="Please input" v-model="input" type="text" size="20" style="width: auto;"></el-input>
+    <div class="input-form">
+      <el-input placeholder="Please input" v-model="input" type="text" size="20" class="member-input"></el-input>
       <el-button @click="addMember">Add</el-button>
       <el-button type="info" @click="saveMember">Save</el-button>
     </div>
     <el-card class="box-card">
-      <div slot="header" class="clearfix">
-        <span style="line-height: 36px;">{{ members.length }} Members</span>
+      <div slot="header">
+        <span>{{ members.length }} Members</span>
       </div>
-      <div v-for="member in members" class="text item">
+      <div v-for="member in members" class="member">
         {{ member.name }}
-        <span @click="deleteMember(member.order)" class="delete">[×]</span>
+        <!-- <span @click="deleteMember(member.order)" class="delete"><i class="el-icon-delete"></i></span> -->
+        <el-button type="text" @click="deleteConfirm(member.order)"><i class="el-icon-delete"></i></el-button>
       </div>
     </el-card>
+
+    <el-dialog
+      title="Tips"
+      :visible.sync="dialogVisible"
+      width="30%">
+      <span>This is a message</span>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="cancelDelete">Cancel</el-button>
+        <el-button type="primary" @click="deleteMember">Delete</el-button>
+      </span>
+    </el-dialog>
   </div>
 </template>
 
@@ -24,6 +36,8 @@ export default {
   data: function () {
     return {
       input: '',
+      dialogVisible: false,
+      deleteTargetOrder: 0,
       members: [
         { id: 1, order: 0, name: 'Murakami' },
         { id: 2, order: 1, name: 'Inoue' }
@@ -39,13 +53,31 @@ export default {
     saveMember: function() {
 
     },
-    deleteMember: function(order) {
-      if(!confirm('Are you sure?')) return false;
-      Vue.delete(this.members, order);
+    deleteMember: function() {
+      this.disableDialog();
+      Vue.delete(this.members, this.deleteTargetOrder);
+      this.initializeDeleteTargetOrder();
 
       this.members.forEach((member, i) => {
         this.members[i].order = i;
       });
+    },
+    deleteConfirm: function(order) {
+      this.enableDialog();
+      this.deleteTargetOrder = order;
+    },
+    cancelDelete: function() {
+      this.disableDialog();
+      this.initializeDeleteTargetOrder();
+    },
+    enableDialog: function() {
+      this.dialogVisible = true;
+    },
+    disableDialog: function() {
+      this.dialogVisible = false;
+    },
+    initializeDeleteTargetOrder: function() {
+      this.deleteTargetOrder = 0;
     }
   }
 }
