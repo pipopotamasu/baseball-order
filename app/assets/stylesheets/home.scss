@@ -29,6 +29,10 @@ body {
           padding: 1em 1.5em;
       }
     }
+
+    .el-dialog__header,.el-dialog__footer,.delete-target {
+      text-align: center;
+    }
   }
 
   .el-tabs {
