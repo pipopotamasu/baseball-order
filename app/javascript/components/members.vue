@@ -2,8 +2,7 @@
   <div id="members">
     <div class="input-form">
       <el-input placeholder="Please input" v-model="input" type="text" size="20" class="member-input"></el-input>
-      <el-button @click="addMember">Add</el-button>
-      <el-button type="info" @click="saveMember">Save</el-button>
+      <el-button type="info" @click="addMember">Add</el-button>
     </div>
     <el-card class="box-card">
       <div slot="header">
@@ -19,7 +18,7 @@
       title="Are you sure to delete below member?"
       :visible.sync="dialogVisible"
       width="30%">
-      <div class="delete-target">{{ deleteTargetOrderName }}</div>
+      <div class="delete-target">{{ deleteTargetName }}</div>
       <span slot="footer" class="dialog-footer">
         <el-button @click="cancelDelete">Cancel</el-button>
         <el-button type="primary" @click="deleteMember">Delete</el-button>
@@ -43,17 +42,20 @@ export default {
     return {
       input: '',
       dialogVisible: false,
-      deleteTargetOrder: 0,
+      deleteTarget: null,
       members: []
     }
   },
   computed: {
-    deleteTargetOrderName: function () {
+    deleteTargetName: function () {
       if(this.dialogVisible){
-        return this.members[this.deleteTargetOrder].name;
+        return this.members[this.deleteTarget.order].name;
       }else{
         return '';
       }
+    },
+    nextOrder: function() {
+      return this.members.length;
     }
   },
   created: function() {
@@ -70,16 +72,29 @@ export default {
     },
     addMember: function() {
       if(this.input == '') return false;
+      axios.post('/members', {
+        name: this.input,
+        order: this.nextOrder
+      }).then((response) => {
+        console.log(response);
+      }).catch((e) => {
+        console.log(e);
+      });
       Vue.set(this.members, this.members.length, { id: this.members.length + 1, order: this.members.length, name: this.input });
       this.input = '';
     },
-    saveMember: function() {
-
-    },
     deleteMember: function() {
       this.disableDialog();
-      Vue.delete(this.members, this.deleteTargetOrder);
-      this.initializeDeleteTargetOrder();
+      self = this
+      axios.delete('/members/' + this.deleteTarget.id, {
+        id: this.deleteTarget.id
+      }).then((response) => {
+        console.log(response);
+      }).catch((e) => {
+        console.log(e);
+      });
+      Vue.delete(this.members, this.deleteTarget.order);
+      this.initializeDeleteTarget();
 
       this.members.forEach((member, i) => {
         this.members[i].order = i;
@@ -87,11 +102,11 @@ export default {
     },
     deleteConfirm: function(order) {
       this.enableDialog();
-      this.deleteTargetOrder = order;
+      this.deleteTarget = this.members[order];
     },
     cancelDelete: function() {
       this.disableDialog();
-      this.initializeDeleteTargetOrder();
+      this.initializeDeleteTarget();
     },
     enableDialog: function() {
       this.dialogVisible = true;
@@ -99,8 +114,8 @@ export default {
     disableDialog: function() {
       this.dialogVisible = false;
     },
-    initializeDeleteTargetOrder: function() {
-      this.deleteTargetOrder = 0;
+    initializeDeleteTarget: function() {
+      this.deleteTarget = null;
     }
   }
 }

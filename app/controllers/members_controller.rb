@@ -1,12 +1,16 @@
 class MembersController < ApplicationController
-  # def create
-  #   render json: Todo.create(todo_params)
-  # end
-  # 
-  # def destroy
-  #   Todo.find(params[:id]).destroy
-  #   render json: :deleted
-  # end
+  def create
+    render json: Member.create(member_params)
+  end
+
+  def destroy
+    # TODO: require refactoring
+    Member.find(params[:id]).destroy
+    Member.all.each_with_index do |member, i|
+      Member.find(member.id).update(order: i)
+    end
+    render json: :deleted
+  end
 
   def all
     render json: Member.all
@@ -14,7 +18,7 @@ class MembersController < ApplicationController
 
   private
 
-  def todo_params
+  def member_params
     params.require(:member).permit(:name, :order)
   end
 end
