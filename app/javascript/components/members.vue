@@ -11,7 +11,6 @@
       </div>
       <div v-for="member in members" class="member">
         {{ member.name }}
-        <!-- <span @click="deleteMember(member.order)" class="delete"><i class="el-icon-delete"></i></span> -->
         <el-button type="text" @click="deleteConfirm(member.order)"><i class="el-icon-delete"></i></el-button>
       </div>
     </el-card>
