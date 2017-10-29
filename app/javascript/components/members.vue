@@ -17,10 +17,10 @@
     </el-card>
 
     <el-dialog
-      title="Tips"
+      title="Are you sure to delete below member?"
       :visible.sync="dialogVisible"
       width="30%">
-      <span>This is a message</span>
+      <div class="delete-target">{{ members[deleteTargetOrder].name }}</div>
       <span slot="footer" class="dialog-footer">
         <el-button @click="cancelDelete">Cancel</el-button>
         <el-button type="primary" @click="deleteMember">Delete</el-button>
