@@ -33,6 +33,11 @@ body {
     .el-dialog__header,.el-dialog__footer,.delete-target {
       text-align: center;
     }
+
+    .el-dialog__header {
+      border-bottom: 1px solid;
+      background-color: #f5f5f5;
+    }
   }
 
   .el-tabs {

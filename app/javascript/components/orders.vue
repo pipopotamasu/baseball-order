@@ -1,7 +1,7 @@
 <template>
   <div id="orders">
     <div class="input-form">
-      <el-button type="info" @click="addGame">Add Game</el-button>
+      <el-button type="primary" @click="addGame">Add Game</el-button>
     </div>
   </div>
 </template>
