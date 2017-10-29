@@ -45,4 +45,37 @@ body {
       padding: 1.5em 2em;
     }
   }
+
+  #orders {
+    .input-form {
+      padding-bottom: 1.5em;
+    }
+
+    .game {
+      padding-bottom: 1.5em;
+      overflow: hidden;
+
+      .game-order {
+        padding-right: 2em;
+      }
+
+      .inline-box {
+        float: left;
+      }
+
+      .table-name {
+        padding: 0.5em;
+      }
+
+      tr:hover>td {
+        background-color: #ecf5ff;
+      }
+
+      .members {
+        .hidden-table-header {
+          display: none;
+        }
+      }
+    }
+  }
 }
