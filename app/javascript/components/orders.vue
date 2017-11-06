@@ -7,29 +7,32 @@
     <div class="games">
       <template v-for="(game, i) in games">
         <div class="game">
-          <div class="game-order inline-box">
-            <el-table :data="tableData">
-              <el-table-column :label="`Game ${ i + 1 }`" class-name="table-name">
-                <el-table-column prop="batting_order" label="#" width="30">
-                </el-table-column>
-                <el-table-column prop="position" width="100" label="Position">
-                </el-table-column>
-                <el-table-column prop="name" label="Name" width="150">
-                </el-table-column>
-              </el-table-column>
-            </el-table>
-          </draggable>
-          </div>
+          <!-- <div class="game-order box-card inline-box">
+            <el-card>
+              <div slot="header">
+                <div class="header">#</div>
+                <div class="header">Position</div>
+                <div class="header">Name</div>
+              </div>
+              <div v-for="member in members" class="member">
+                {{ member.name }}
+              </div>
+            </el-card>
+          </div> -->
 
-          <div class="members inline-box">
-            <el-table :data="members">
-              <el-table-column :label="`Game ${ i + 1 }`" class-name="hidden-table-header">
-                <el-table-column prop="name" label="Members" width="150">
-                </el-table-column>
-              </el-table-column>
-            </el-table>
+          <div class="members box-card inline-box">
+            <el-card>
+              <div slot="header">
+                <span>Members</span>
+              </div>
+              <draggable v-model="members" :element="'div'" :options="{ animation: 200, group: 'order', filter: '.ignore-elements' }">
+                <div v-for="member in members" class="member">
+                  {{ member.name }}
+                </div>
+              </draggable>
+            </el-card>
           </div>
-      </div>
+        </div>
       </template>
     </div>
   </div>
@@ -50,7 +53,7 @@ if (document.getElementsByName('csrf-token')[0]) {
 export default {
   data: function () {
     return {
-      games: [],
+      games: [{ id: 1 }],
       members: [],
       value: '',
       tableData: [{ batting_order: 1, position: 6, name: 'Murakami' }
