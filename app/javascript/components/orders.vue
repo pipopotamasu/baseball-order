@@ -14,14 +14,19 @@
                 <th>Position</th>
                 <th>Name</th>
               </thead>
-              <draggable v-model="orders" :element="'tbody'" :options="{ animation: 200, group: 'order', filter: '.ignore-elements' }">
-                <template v-for="(order, i) in orders" class="member">
+              <draggable v-model="orders[i].field_members" :element="'tbody'" :options="{ animation: 200, group: 'order', filter: '.ignore-elements' }">
+                <template v-for="(member, k) in orders[i].field_members" class="member">
                   <tr>
-                    <td>{{ i + 1 }}</td>
-                    <td>{{ order.position }}</td>
-                    <td>{{ order.name }}</td>
+                    <td>{{ k + 1 }}</td>
+                    <td>{{ member.position }}</td>
+                    <td>{{ member.name }}</td>
                   </tr>
                 </template>
+                <tr class=".ignore-elements">
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
               </draggable>
             </table>
           </div>
@@ -31,8 +36,8 @@
               <div slot="header">
                 <span>Members</span>
               </div>
-              <draggable v-model="members" :element="'div'" :options="{ animation: 200, group: 'order', filter: '.ignore-elements' }">
-                <div v-for="member in members" class="member">
+              <draggable v-model="orders[i].non_field_members" :element="'div'" :options="{ animation: 200, group: 'order', filter: '.ignore-elements' }">
+                <div v-for="member in orders[i].non_field_members" class="member">
                   {{ member.name }}
                 </div>
               </draggable>
@@ -59,12 +64,9 @@ if (document.getElementsByName('csrf-token')[0]) {
 export default {
   data: function () {
     return {
-      games: [{ id: 1 }],
+      games: [],
       members: [],
-      orders: [
-        { batting_order: 1, position: 6, name: 'Tom' },
-        { batting_order: 2, position: 7, name: 'Mary' },
-      ]
+      orders: []
     }
   },
   components: {
@@ -75,16 +77,24 @@ export default {
   },
   methods: {
     addGame: function() {
-      Vue.set(this.games, this.games.length, { id: this.games.length + 1, order: this.games.length, order_ids: [] });
+      Vue.set(this.orders, this.orders.length, { id: this.orders.length + 1, field_members: [], non_field_members: this.members });
+      Vue.set(this.games, this.games.length, { id: this.games.length + 1, order_id: this.orders.length + 1 });
+      console.log(this.orders);
     },
     fetchMembers: function() {
       let self = this;
       axios.get('/members/all').then((response) => {
         self.members = response.data
+        self.setNonFieldMembers(response.data);
       }).catch((e) => {
         // console.log(e);
       });
     },
+    setNonFieldMembers: function(members) {
+      this.orders.forEach((order, i) => {
+        this.orders[i].non_field_members = members
+      });
+    }
   }
 }
 </script>
