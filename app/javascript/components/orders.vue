@@ -8,11 +8,11 @@
       <template v-for="(game, i) in games">
         <div class="game">
           <div class="game-order inline-box">
-            <table>
+            <table cellspacing="0" cellpadding="0" border="0">
               <thead>
-                <th>打順</th>
-                <th>ポジション</th>
-                <th>名前</th>
+                <th>#</th>
+                <th>Position</th>
+                <th>Name</th>
               </thead>
               <draggable v-model="orders" :element="'tbody'" :options="{ animation: 200, group: 'order', filter: '.ignore-elements' }">
                 <template v-for="(order, i) in orders" class="member">
