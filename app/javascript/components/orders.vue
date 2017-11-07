@@ -7,18 +7,24 @@
     <div class="games">
       <template v-for="(game, i) in games">
         <div class="game">
-          <!-- <div class="game-order box-card inline-box">
-            <el-card>
-              <div slot="header">
-                <div class="header">#</div>
-                <div class="header">Position</div>
-                <div class="header">Name</div>
-              </div>
-              <div v-for="member in members" class="member">
-                {{ member.name }}
-              </div>
-            </el-card>
-          </div> -->
+          <div class="game-order inline-box">
+            <table>
+              <thead>
+                <th>打順</th>
+                <th>ポジション</th>
+                <th>名前</th>
+              </thead>
+              <draggable v-model="orders" :element="'tbody'" :options="{ animation: 200, group: 'order', filter: '.ignore-elements' }">
+                <template v-for="(order, i) in orders" class="member">
+                  <tr>
+                    <td>{{ i + 1 }}</td>
+                    <td>{{ order.position }}</td>
+                    <td>{{ order.name }}</td>
+                  </tr>
+                </template>
+              </draggable>
+            </table>
+          </div>
 
           <div class="members box-card inline-box">
             <el-card>
@@ -56,25 +62,10 @@ export default {
       games: [{ id: 1 }],
       members: [],
       value: '',
-      tableData: [{ batting_order: 1, position: 6, name: 'Murakami' }
-          // {
-          //   batting_order: 1,
-          //   position: 1,
-          //   name: 'Tom'
-          // }, {
-          //   batting_order: 2,
-          //   position: 2,
-          //   name: 'Tom'
-          // }, {
-          //   batting_order: 3,
-          //   position: 3,
-          //   name: 'Tom'
-          // }, {
-          //   batting_order: 4,
-          //   position: 4,
-          //   name: 'Tom'
-          // }
-        ]
+      orders: [
+        { batting_order: 1, position: 6, name: 'Tom' },
+        { batting_order: 2, position: 7, name: 'Mary' },
+      ]
     }
   },
   components: {
