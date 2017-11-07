@@ -18,7 +18,16 @@
                 <template v-for="(member, k) in orders[i].field_members" class="member">
                   <tr>
                     <td>{{ k + 1 }}</td>
-                    <td>{{ member.position }}</td>
+                    <td>
+                      <el-select v-model="member.position" placeholder="Select">
+                      <el-option
+                        v-for="item in positions"
+                        :key="item.value"
+                        :label="item.label"
+                        :value="item.value">
+                      </el-option>
+                    </el-select>
+                    </td>
                     <td>{{ member.name }}</td>
                   </tr>
                 </template>
@@ -66,7 +75,50 @@ export default {
     return {
       games: [],
       members: [],
-      orders: []
+      orders: [],
+      positions: [
+        {
+          value: 'P',
+          label: 'P'
+        },
+        {
+          value: 'C',
+          label: 'C'
+        },
+        {
+          value: 'FB',
+          label: 'FB'
+        },
+        {
+          value: 'SB',
+          label: 'SB'
+        },
+        {
+          value: 'TB',
+          label: 'TB'
+        },
+        {
+          value: 'SS',
+          label: 'SS'
+        },
+        {
+          value: 'LF',
+          label: 'LF'
+        },
+        {
+          value: 'CF',
+          label: 'CF'
+        },
+        {
+          value: 'RF',
+          label: 'RF'
+        },
+        {
+          value: 'DH',
+          label: 'DH'
+        },
+      ],
+      value: 'DH'
     }
   },
   components: {
@@ -79,7 +131,6 @@ export default {
     addGame: function() {
       Vue.set(this.orders, this.orders.length, { id: this.orders.length + 1, field_members: [], non_field_members: this.members });
       Vue.set(this.games, this.games.length, { id: this.games.length + 1, order_id: this.orders.length + 1 });
-      console.log(this.orders);
     },
     fetchMembers: function() {
       let self = this;
