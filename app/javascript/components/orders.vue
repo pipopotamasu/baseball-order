@@ -61,7 +61,6 @@ export default {
     return {
       games: [{ id: 1 }],
       members: [],
-      value: '',
       orders: [
         { batting_order: 1, position: 6, name: 'Tom' },
         { batting_order: 2, position: 7, name: 'Mary' },
@@ -72,13 +71,13 @@ export default {
     Draggable
   },
   created: function() {
-    this.fetchHoge();
+    this.fetchMembers();
   },
   methods: {
     addGame: function() {
       Vue.set(this.games, this.games.length, { id: this.games.length + 1, order: this.games.length, order_ids: [] });
     },
-    fetchHoge: function() {
+    fetchMembers: function() {
       let self = this;
       axios.get('/members/all').then((response) => {
         self.members = response.data
