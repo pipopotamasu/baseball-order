@@ -16,6 +16,7 @@
 import Vue from 'vue';
 import Order from './order.vue'
 import axios from 'axios'
+import { positions } from '../constants'
 
 // set csrf token by getting that from dom.
 if (document.getElementsByName('csrf-token')[0]) {
@@ -40,7 +41,7 @@ export default {
   },
   methods: {
     addOrder: function() {
-      Vue.set(this.orders, this.orders.length, { id: this.orders.length + 1, starting_members: [], sub_members: this.members });
+      Vue.set(this.orders, this.orders.length, { id: this.orders.length + 1, starting_members: [], sub_members: this.members, positions: positions });
     },
     fetchMembers: function() {
       let self = this;

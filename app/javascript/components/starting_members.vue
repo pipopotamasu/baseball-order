@@ -13,7 +13,7 @@
             <td>
               <el-select v-model="member.position" placeholder="Select">
               <el-option
-                v-for="item in positions"
+                v-for="item in order.positions"
                 :key="item.value"
                 :label="item.label"
                 :value="item.value">
