@@ -2,7 +2,7 @@
   <tr>
     <td>{{ index + 1 }}</td>
     <td>
-      <el-select v-model="member.position" placeholder="Select">
+      <el-select v-model="position" placeholder="Select">
       <el-option
         v-for="item in positions"
         :key="item.value"
@@ -17,6 +17,11 @@
 
 <script>
 export default {
-  props: ['member', 'positions', 'index']
+  props: ['member', 'positions', 'index'],
+  data: function() {
+    return {
+      position: ''
+    }
+  }
 }
 </script>
