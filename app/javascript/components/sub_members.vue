@@ -4,8 +4,8 @@
       <div slot="header">
         <span>Members</span>
       </div>
-      <draggable v-model="order.non_field_members" :element="'div'" :options="{ animation: 200, group: 'order', filter: '.ignore-elements' }">
-        <div v-for="member in order.non_field_members" class="member">
+      <draggable v-model="order.sub_members" :element="'div'" :options="{ animation: 200, group: 'order', filter: '.ignore-elements' }">
+        <div v-for="member in order.sub_members" class="member">
           {{ member.name }}
         </div>
       </draggable>

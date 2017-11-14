@@ -40,7 +40,7 @@ export default {
   },
   methods: {
     addOrder: function() {
-      Vue.set(this.orders, this.orders.length, { id: this.orders.length + 1, field_members: [], non_field_members: this.members });
+      Vue.set(this.orders, this.orders.length, { id: this.orders.length + 1, starting_members: [], sub_members: this.members });
     },
     fetchMembers: function() {
       let self = this;
@@ -53,7 +53,7 @@ export default {
     },
     setNonFieldMembers: function(members) {
       this.orders.forEach((order, i) => {
-        this.orders[i].non_field_members = members
+        this.orders[i].sub_members = members
       });
     }
   }

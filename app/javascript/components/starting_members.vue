@@ -6,8 +6,8 @@
         <th>Position</th>
         <th>Name</th>
       </thead>
-      <draggable v-model="order.field_members" :element="'tbody'" :options="{ animation: 200, group: 'order', filter: '.ignore-elements' }">
-        <template v-for="(member, k) in order.field_members" class="member">
+      <draggable v-model="order.starting_members" :element="'tbody'" :options="{ animation: 200, group: 'order', filter: '.ignore-elements' }">
+        <template v-for="(member, k) in order.starting_members" class="member">
           <tr>
             <td>{{ k + 1 }}</td>
             <td>
