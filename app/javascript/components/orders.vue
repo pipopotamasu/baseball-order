@@ -1,12 +1,12 @@
 <template>
-  <div id="orders">
+  <div id="orders-content">
     <div class="input-form">
       <el-button type="primary" @click="addGame">Add Game</el-button>
     </div>
 
-    <div class="games">
+    <div class="orders-box">
       <template v-for="(game, i) in games">
-        <div class="game">
+        <div class="order-box">
           <div class="game-order inline-box">
             <table cellspacing="0" cellpadding="0" border="0">
               <thead>
