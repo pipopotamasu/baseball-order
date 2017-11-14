@@ -1,11 +1,11 @@
 <template>
   <div id="orders-content">
     <div class="input-form">
-      <el-button type="primary" @click="addGame">Add Game</el-button>
+      <el-button type="primary" @click="addOrder">Add Order</el-button>
     </div>
 
     <div class="orders-box">
-      <template v-for="(game, i) in games">
+      <template v-for="(order, i) in orders">
         <div class="order-box">
           <div class="game-order inline-box">
             <table cellspacing="0" cellpadding="0" border="0">
@@ -14,8 +14,8 @@
                 <th>Position</th>
                 <th>Name</th>
               </thead>
-              <draggable v-model="orders[i].field_members" :element="'tbody'" :options="{ animation: 200, group: 'order', filter: '.ignore-elements' }">
-                <template v-for="(member, k) in orders[i].field_members" class="member">
+              <draggable v-model="order.field_members" :element="'tbody'" :options="{ animation: 200, group: 'order', filter: '.ignore-elements' }">
+                <template v-for="(member, k) in order.field_members" class="member">
                   <tr>
                     <td>{{ k + 1 }}</td>
                     <td>
@@ -45,8 +45,8 @@
               <div slot="header">
                 <span>Members</span>
               </div>
-              <draggable v-model="orders[i].non_field_members" :element="'div'" :options="{ animation: 200, group: 'order', filter: '.ignore-elements' }">
-                <div v-for="member in orders[i].non_field_members" class="member">
+              <draggable v-model="order.non_field_members" :element="'div'" :options="{ animation: 200, group: 'order', filter: '.ignore-elements' }">
+                <div v-for="member in order.non_field_members" class="member">
                   {{ member.name }}
                 </div>
               </draggable>
@@ -73,7 +73,6 @@ if (document.getElementsByName('csrf-token')[0]) {
 export default {
   data: function () {
     return {
-      games: [],
       members: [],
       orders: [],
       positions: [
@@ -128,9 +127,8 @@ export default {
     this.fetchMembers();
   },
   methods: {
-    addGame: function() {
+    addOrder: function() {
       Vue.set(this.orders, this.orders.length, { id: this.orders.length + 1, field_members: [], non_field_members: this.members });
-      Vue.set(this.games, this.games.length, { id: this.games.length + 1, order_id: this.orders.length + 1 });
     },
     fetchMembers: function() {
       let self = this;
