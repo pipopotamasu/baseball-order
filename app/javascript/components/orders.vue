@@ -1,11 +1,11 @@
 <template>
   <div id="orders-content">
     <div class="input-form">
-      <el-button type="primary" @click="addOrder">Add Order</el-button>
+      <el-button type="primary" @click="ADD_ORDER">Add Order</el-button>
     </div>
 
     <div class="orders-box">
-      <template v-for="(order, i) in orders">
+      <template v-for="(order, i) in baseball_order.orders">
         <order :order="order"></order>
       </template>
     </div>
@@ -13,50 +13,26 @@
 </template>
 
 <script>
+import { mapState, mapActions } from 'vuex'
+import * as types from '../store/mutation_types/baseball_order';
 import Vue from 'vue';
 import Order from './order.vue'
-import axios from 'axios'
-import { positions } from '../constants'
-
-// set csrf token by getting that from dom.
-if (document.getElementsByName('csrf-token')[0]) {
-  let token = document.getElementsByName('csrf-token')[0].getAttribute('content')
-  axios.defaults.headers.common['X-CSRF-Token'] = token
-  axios.defaults.headers.common['Accept'] = 'application/json'
-}
 
 export default {
-  data: function () {
-    return {
-      members: [],
-      orders: [],
-      value: 'DH'
-    }
+  computed: {
+    ...mapState(['baseball_order']),
   },
   components: {
     Order
   },
   created: function() {
-    this.fetchMembers();
+    this.FETCH_MEMBERS();
   },
   methods: {
-    addOrder: function() {
-      Vue.set(this.orders, this.orders.length, { id: this.orders.length + 1, starting_members: [], sub_members: this.members, positions: positions });
-    },
-    fetchMembers: function() {
-      let self = this;
-      axios.get('/members/all').then((response) => {
-        self.members = response.data
-        self.setNonFieldMembers(response.data);
-      }).catch((e) => {
-        // console.log(e);
-      });
-    },
-    setNonFieldMembers: function(members) {
-      this.orders.forEach((order, i) => {
-        this.orders[i].sub_members = members
-      });
-    }
+    ...mapActions([
+        types.FETCH_MEMBERS,
+        types.ADD_ORDER
+    ]),
   }
 }
 </script>

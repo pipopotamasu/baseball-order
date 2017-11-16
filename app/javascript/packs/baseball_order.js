@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Orders from '../components/orders.vue'
 import Members from '../components/members.vue'
 import Element from 'element-ui'
+import store from '../store/baseball_order'
 
 Vue.use(Element)
 Vue.use(VueRouter)
@@ -18,6 +19,7 @@ const router = new VueRouter({
 
 // bootstrap the demo
 var app = new Vue({
+  store,
   el: '#app',
   router,
   data: function(){
