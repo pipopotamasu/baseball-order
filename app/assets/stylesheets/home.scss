@@ -51,9 +51,19 @@ body {
       padding-bottom: 1.5em;
     }
 
+    .el-collapse {
+      border: 1px solid #e6ebf5
+    }
+    .el-collapse-item__header {
+      padding-left: 1em;
+      background-color: #f5f7fa;
+    }
+
     .order-box {
+      padding-top: 1.5em;
       padding-bottom: 1.5em;
       overflow: hidden;
+      padding-left: 140px;
 
       .box-card {
         text-align: center;

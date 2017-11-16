@@ -5,9 +5,11 @@
     </div>
 
     <div class="orders-box">
-      <template v-for="(order, i) in baseball_order.orders">
-        <order :order="order"></order>
-      </template>
+      <el-collapse v-model="activeNames">
+        <template v-for="(order, i) in baseball_order.orders">
+          <order :order="order" :i="i"></order>
+        </template>
+      </el-collapse>
     </div>
   </div>
 </template>
@@ -19,6 +21,11 @@ import Vue from 'vue';
 import Order from './order.vue'
 
 export default {
+  data() {
+    return {
+      activeNames: []
+    };
+  },
   computed: {
     ...mapState(['baseball_order']),
   },
