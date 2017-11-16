@@ -2,14 +2,14 @@
   <div id="members">
     <div class="input-form">
       <el-input placeholder="Please input" v-model="input" type="text" size="20" class="member-input"></el-input>
-      <el-button type="info" @click="addMember">Add</el-button>
+      <el-button type="primary" @click="addMember">Add</el-button>
     </div>
     <el-card class="box-card">
       <div slot="header">
         <span>{{ members.length }} Members</span>
       </div>
       <div v-for="member in members" class="member">
-        {{ member.name }}
+        ・{{ member.name }}
         <el-button type="text" @click="deleteConfirm(member.order)"><i class="el-icon-delete"></i></el-button>
       </div>
     </el-card>
@@ -17,7 +17,7 @@
     <el-dialog
       title="Are you sure to delete below member?"
       :visible.sync="dialogVisible"
-      width="30%">
+      width="60%">
       <div class="delete-target">{{ deleteTargetName }}</div>
       <span slot="footer" class="dialog-footer">
         <el-button @click="cancelDelete">Cancel</el-button>

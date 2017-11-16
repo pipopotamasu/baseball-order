@@ -1,10 +1,10 @@
 <div id="app">
   <el-tabs v-model="activeName" type="border-card" @tab-click="swichTab">
-    <el-tab-pane label="Hello" name="hello"><router-view></router-view></el-tab-pane>
+    <el-tab-pane label="Orders" name="orders"><router-view></router-view></el-tab-pane>
     <el-tab-pane label="Members" name="members"><router-view></router-view></el-tab-pane>
   </el-tabs>
   <div id="rooter-wrapper" style="display: none;">
-    <router-link id="hello" to="/hello1">Go to Hello1</router-link>
+    <router-link id="orders" to="/orders">Go to Hello1</router-link>
     <router-link id="members" to="/members">Go to Members</router-link>
   </div>
 </div>
