@@ -32,7 +32,7 @@ import Vue from 'vue';
 import axios from 'axios'
 // set csrf token by getting that from dom.
 if (document.getElementsByName('csrf-token')[0]) {
-  let token = document.getElementsByName('csrf-token')[0].getAttribute('content')
+  let token: ?string = document.getElementsByName('csrf-token')[0].getAttribute('content')
   axios.defaults.headers.common['X-CSRF-Token'] = token
   axios.defaults.headers.common['Accept'] = 'application/json'
 }
@@ -100,7 +100,7 @@ export default {
         this.members[i].order = i;
       });
     },
-    deleteConfirm: function(order) {
+    deleteConfirm: function(order: number) {
       this.enableDialog();
       this.deleteTarget = this.members[order];
     },
