@@ -9,11 +9,11 @@
         },
         "useBuiltIns": true
       },
-      "flow",
     ]
   ],
 
   "plugins": [
+    "transform-flow-strip-types",
     "syntax-dynamic-import",
     "transform-object-rest-spread",
     ["transform-class-properties", { "spec": true }]
