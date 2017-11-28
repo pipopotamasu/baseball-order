@@ -20,5 +20,8 @@
     "babel-preset-flow": "^6.23.0",
     "flow-bin": "^0.59.0",
     "webpack-dev-server": "^2.9.2"
+  },
+  "scripts": {
+    "flow": "flow check"
   }
 }

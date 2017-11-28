@@ -1,3 +1,4 @@
+// @flow
 import * as types from '../mutation_types/baseball_order'
 import { positions } from '../constants'
 import Vue from 'vue'
