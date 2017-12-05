@@ -1,24 +1,18 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This app makes it easy to determine the order of baseball games.
 
-Things you may want to cover:
+This is made by RoR, Vue.js, VueRouter, Vuex, ElementUi, flux.
 
-* Ruby version
+```
+# install dependencies
+bundle install
+yarn install
 
-* System dependencies
+# build js assets
+bin/webpack
 
-* Configuration
+# start app
+bin/rails s
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+```
