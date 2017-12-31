@@ -1,3 +1,4 @@
+// @flow
 import * as types from '../mutation_types/baseball_order'
 import { positions } from '../constants'
 import Vue from 'vue'
@@ -5,7 +6,7 @@ import axios from 'axios'
 
 // set csrf token by getting that from dom.
 if (document.getElementsByName('csrf-token')[0]) {
-  let token = document.getElementsByName('csrf-token')[0].getAttribute('content')
+  let token: ?string = document.getElementsByName('csrf-token')[0].getAttribute('content')
   axios.defaults.headers.common['X-CSRF-Token'] = token
   axios.defaults.headers.common['Accept'] = 'application/json'
 }
